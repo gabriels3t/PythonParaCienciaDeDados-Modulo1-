@@ -12,7 +12,9 @@ Na primeira parte, irá conhecer o Python e seus principais aspectos, focado em 
 
 
 # Cursos 
-Python para Data Science: Primeiros passos
-Python para Data Science: Introdução à linguagem e Numpy
+Python para Data Science: Primeiros passos.
+
+Python para Data Science: Introdução à linguagem e Numpy.
+
 Python para Data Science: Funções, Pacotes e Pandas básico
 
