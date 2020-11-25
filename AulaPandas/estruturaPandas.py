@@ -59,7 +59,6 @@ dataset = pd.read_csv('data/db.csv', sep=';', index_col =  0)
 '''
 -------------------------------------
     SELEÇÕES COM DATAFRAME
-
 -------------------------------------
 '''
 '''
@@ -113,5 +112,70 @@ linhas e colunas específicas
 '''
     todas as linhas
 '''
-print(dataset.iloc[:,[0,5,2]])
+#print(dataset.iloc[:,[0,5,2]])
 
+'''
+-------------------------------------
+   QUERIES COM DATAFRAME
+-------------------------------------
+'''
+'''
+caso seja apenas uma query sem espaços, .nome
+'''
+#print(dataset.Motor)
+select = dataset.Motor == 'Motor Diesel' #retorna booleano
+#print(dataset[select])# retorna apenas os trues 
+
+
+'''
+Mais de uma query
+'''
+#print(dataset[(dataset.Motor == 'Motor Diesel') & (dataset.Zero_km == True)]) #Retorna as informações do select 
+
+'''
+    Utilizando o metodo Query
+'''
+#print(dataset.query('Motor == "Motor Diesel" and Zero_km == True'))
+
+'''
+-------------------------------------
+   ITERANDO COM DATAFRAMES
+-------------------------------------
+'''
+print(dataset)
+for index , row in dataset.iterrows():
+    
+    if(2019 - row['Ano'] != 0):
+        dataset.loc[index, 'Km_media'] = row['Quilometragem']/(2019 - row['Ano'])
+    else:
+        dataset.loc[index,'Km_media'] = 0
+
+
+#print(dataset)
+
+
+'''
+-------------------------------------
+    TRATAMENTO DE DADOS
+-------------------------------------
+'''
+'''
+    Utilizando a função isna retorna uma Series booleana , quando o valor for nulo vai retornar True
+'''
+#print(dataset.Quilometragem.isna())
+#print(dataset[dataset.Quilometragem.isna()])
+'''
+    preencher valores nulos
+    dataset.fillna(0) Alteração apenas na visualização
+    fillna(0,inplace=True ) inplace altera no dataset 
+'''
+#dataset.fillna(0, inplace=True)
+dataset.fillna(0,inplace=True)
+print(dataset.query('Zero_km == True'))
+
+dataset = pd.read_csv('data/db.csv', sep=';') 
+'''
+deletar na
+'''
+dataset.dropna(subset = ['Quilometragem'],inplace=True)
+print(dataset)
